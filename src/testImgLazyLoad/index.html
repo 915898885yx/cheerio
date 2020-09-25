@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>
+		<img data-src="./aaa.png" src="./aaa.png">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="./aaa.png">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+	<div>
+		<img data-src="./aaa.png" src="">
+	</div>
+</body>
+<script type="text/javascript">
+	/*
+		屏幕可是区域的高度 + 滚动条滚动距离 > 元素到文档顶部的距离
+		document.documentElement.clientHeight + document.documentElement.scrollTop > element.offsetTop
+
+		使用getBoundingClientRect() 获取元素大小和位置
+
+		IntersectionObserver 自动观察元素是否在视口内
+	*/
+	// function throttle (fn, wait) {
+	// 	var flag = true
+	// 	return function (...args) {
+	// 		if (flag) {
+	// 			flag = false
+	// 			fn(...args)
+	// 			setTimeout(() => {
+	// 				flag = true
+	// 			}, wait)
+	// 		}
+	// 	}
+	// }
+	function throttle (func, wait) {
+		var timer = null
+		return function (...args) {
+			if (!timer) {
+				func(...args)
+				timer = setTimeout(function (){
+					timer = null
+				}, wait)
+			}
+		}
+	}
+	window.onload = function () {
+		const imgs = document.getElementsByTagName('img')
+		function calc () {
+			for (let i = 0; i < imgs.length; i++) {
+				if (!imgs[i].getAttribute('src') && imgs[i].getBoundingClientRect().top < 1000) {
+					imgs[i].setAttribute('src', imgs[i].getAttribute('data-src'))
+				}
+			}
+		}
+		var ret = throttle(calc, 200)
+		window.addEventListener('scroll', () => {
+			ret()
+		})
+	}
+</script>
+</html>

@@ -29,7 +29,6 @@ const sendRequest = (url) => {
           "rank": (pageNum - 1) * 10 + +index + 1
         }
         dbase.collection('test').insertOne(insertData)
-        console.log(insertData, "insertData")
       })
       pageNum++
       // 
@@ -47,13 +46,11 @@ const queryOneDataByObjectId = id => {
     const dbase = db.db('local')
     dbase.collection('test').find({"_id": ObjectID(id)}).toArray((err, result) => {
       if (err) {
-        console.log(err)
         db.close()
         db = null
         process.exit(0)
       }
       db.close()
-      console.log(result)
     })
   })
 }
